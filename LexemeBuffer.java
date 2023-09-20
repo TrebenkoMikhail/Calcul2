@@ -4,7 +4,6 @@ import java.util.List;
 public class LexemeBuffer {
     private int pos;
     public List<Lexeme> lexemes;
-
     public LexemeBuffer( List<Lexeme> lexemes) {
         this.lexemes = lexemes;
     }
