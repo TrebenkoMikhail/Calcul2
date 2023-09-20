@@ -50,7 +50,7 @@ public class LexemeBuffer {
                     pos++;
                     continue;
                 default:
-                    if (c <= '9' && c >= '0') {
+                    if (Character.isDigit(c)) {
                         StringBuilder sb = new StringBuilder();
                         do {
                             sb.append(c);
@@ -59,7 +59,7 @@ public class LexemeBuffer {
                                 break;
                             }
                             c = expText.charAt(pos);
-                        } while (c <= '9' && c >= '0');
+                        } while (Character.isDigit(c));
                         lexemes.add(new Lexeme(LexemeType.NUMBER, sb.toString()));
                     } else {
                         if (c != ' ') {
@@ -119,16 +119,21 @@ public class LexemeBuffer {
         Lexeme lexeme = lexemes.next();
         switch (lexeme.type) {
             case NUMBER:
-                return Integer.parseInt(lexeme.value);
+                if (Integer.parseInt(lexeme.value) <= 10) {
+                    return Integer.parseInt(lexeme.value);
+                } else {
+                    throw new RuntimeException("The number should not be more than 10" + lexeme.value + "at position: " + lexemes.getPos());
+                }
+
             case LEFT_BRACKET:
                 int value = expr(lexemes);
                 lexeme = lexemes.next();
-                if (lexeme.type != LexemeType.RIGHT_BRACKET) {
-                    throw new RuntimeException("Unexpected token: " + lexeme.value + "at position: " + lexemes.getPos());
-                }
-                return value;
-            default:
-                throw new RuntimeException("Unexpected token: " + lexeme.value + "at position: " + lexemes.getPos());
+        if (lexeme.type != LexemeType.RIGHT_BRACKET) {
+            throw new RuntimeException("Unexpected token: " + lexeme.value + "at position: " + lexemes.getPos());
         }
+        return value;
+        default:
+        throw new RuntimeException("Unexpected token: " + lexeme.value + "at position: " + lexemes.getPos());
+    }
     }
 }
