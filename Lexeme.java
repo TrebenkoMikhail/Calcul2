@@ -1,5 +1,4 @@
 public class Lexeme {
-
     LexemeType type;
     String value;
 

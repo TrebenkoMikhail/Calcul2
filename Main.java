@@ -11,7 +11,4 @@ public class Main {
         LexemeBuffer lexemeBuffer = new LexemeBuffer(lexemes);
         System.out.println("Result: " + LexemeBuffer.expr(lexemeBuffer));
     }
-
-
-
 }

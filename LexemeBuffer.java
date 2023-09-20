@@ -124,7 +124,6 @@ public class LexemeBuffer {
                 } else {
                     throw new RuntimeException("The number should not be more than 10" + lexeme.value + "at position: " + lexemes.getPos());
                 }
-
             case LEFT_BRACKET:
                 int value = expr(lexemes);
                 lexeme = lexemes.next();
