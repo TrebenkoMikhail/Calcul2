@@ -133,6 +133,6 @@ public class LexemeBuffer {
         return value;
         default:
         throw new RuntimeException("Unexpected token: " + lexeme.value + "at position: " + lexemes.getPos());
-    }
+        }
     }
 }
